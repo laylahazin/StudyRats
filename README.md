@@ -1,1 +1,1 @@
-# StudyRats
+O objetivo do Study Rats é incentivar a criação de uma rotina de estudos, permitindo que o estudante acompanhe seu tempo de dedicação e seu progresso por meio de elementos de gamificação e interação.# StudyRats
