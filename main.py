@@ -1,5 +1,4 @@
-from lista import usuarios
-from lista import usuario_logado
+import lista
 from CadastroUsuario import cadastrar_usuario
 from LoginUsuario import realizar_login, deslogar
 
@@ -8,8 +7,8 @@ def menu_principal():
         print("\n====================")
         
     
-        if usuario_logado:
-            print(f" Status: LOGADO como ({usuario_logado})")
+        if lista.usuario_logado:
+            print(f" Status: LOGADO como ({lista.usuario_logado})")
             print("====================")
             print("1. Perfil")
             print("2. Sair da conta (Logoff)")
@@ -24,9 +23,9 @@ def menu_principal():
         opcao = input("\nEscolha uma opção: ").strip()
 
         # --- FLUXO QUANDO O USUÁRIO JÁ ESTÁ LOGADO ---
-        if usuario_logado is not None:
+        if lista.usuario_logado is not None:
             if opcao == "1":
-                print(f"\nBem-vindo(a), {usuario_logado}!")
+                print(f"\nBem-vindo(a), {lista.usuario_logado}!")
             elif opcao == "2":
                 deslogar()
             elif opcao == "3":
