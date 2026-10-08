@@ -1,70 +1,25 @@
+from lista import usuarios
+from lista import usuario_logado
 
-# Código do Login do usuário no StudyRats
+def realizar_login():
+    global usuario_logado
 
-print('===== STUDYRATS =====')
-print('Login do usuário')
+    print("\n--- TELA DE LOGIN ---")
+    email = input("Digite seu e-mail: ").strip().lower()
+    senha = input("Digite sua senha: ")
 
+    # busca a lista
+    for usuario in usuarios:
+        if usuario["email"] == email and usuario["senha"] == senha:
+            usuario_logado = usuario["ratname"]
+            print(f"\nLogin bem-sucedido! Você está conectado como: {usuario_logado}")
+            return
 
-def login():
-
-    while True:
-
-        email = input('Digite seu email institucional: ')
-
-        if not email.endswith('@ufrpe.br'):
-            print('Verifique se o email está correto!')
-        else:
-            break
-
-    while True:
-
-        senha = input('Digite sua senha: ')
-
-        if senha != senha_cadastrada:
-            print('Senha incorreta, tente novamente!')
-        else:
-            print('Está pronto para arrebentar hoje?')
-            break
+    print("\nErro: E-mail ou senha incorretos.")
 
 
-def menu():
-
-    print()
-    print('===== MENU =====')
-
-    registro = input('Deseja registrar presença? (sim/não): ')
-
-    if registro.lower() == 'sim':
-        print('Você será direcionado para o Registro de Presença.')
-
-    else:
-        modelo = input('Deseja ir no modelo de estudo? (sim/não): ')
-
-        if modelo.lower() == 'sim':
-            print('Você será direcionado para o Modelo de Estudo.')
-
-        else:
-            sala = input('Deseja ir na sala de estudo? (sim/não): ')
-
-            if sala.lower() == 'sim':
-                print('Você será direcionado para a Sala de Estudo.')
-
-            else:
-                comunidades = input('Deseja ir nas comunidades? (sim/não): ')
-
-                if comunidades.lower() == 'sim':
-                    print('Você será direcionado para as Comunidades.')
-
-                else:
-                    print('Aplicativo encerrado. Até mais!')
-
-
-# Dados cadastrados pelo usuário
-email_cadastrado = input('Digite o email cadastrado: ')
-senha_cadastrada = input('Digite a senha cadastrada: ')
-
-print()
-print('Agora vamos realizar o login.')
-
-login()
-menu()
+def deslogar():
+    global usuario_logado
+    print(f"\nSaindo da conta de {usuario_logado}...")
+    usuario_logado = None
+    print("Você saiu da conta com sucesso!")
