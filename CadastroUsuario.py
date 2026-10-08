@@ -1,38 +1,19 @@
-# Código do cadastro do usuário no StudyRats
+from lista import usuarios
 
-print('Seja bem-vindo ao StudyRats!')
-print('Precisamos que você digite o seu email institucional.')
-
-
-def funcao_email():
-
+def cadastrar_usuario():
+    print("\n--- TELA DE CADASTRO ---")
     while True:
-        email = input('Digite o seu email institucional: ')
-
-        if email.endswith('@ufrpe.br'):
+        email = input("Digite seu e-mail: ").strip().lower()
+        if email.endswith('@ufrpe.br') and email.count('@') == 1 and len(email) > 9:
             print('Email válido!')
             break
         else:
-            print('Email inválido! Verifique se você está colocando o seu email institucional!')
+            print('Email inválido! Verifique se você está colocando o seu email institucional corretamente!')
 
-
-def ratname():
-
-    while True:
-        ratname = input('Crie o seu Ratname: ')
-
-        jaexistente = False
-
-        if ratname == '':
-            print('Ratname inválido! Digite um Ratname.')
-        elif jaexistente == True:
-            print('Ratname já existente! Crie outro Ratname.')
-        else:
-            print('Seu Ratname é válido!')
-            break
-
-
-def senha():
+    for usuario in usuarios:
+        if usuario["email"] == email:
+            print("Erro: Este e-mail já está cadastrado!")
+            return
 
     while True:
         senha = input('Crie a sua senha no StudyRats! (Ela deve conter de 6 a 8 caracteres, uma letra maiúscula, um caractere especial e um numeral): ')
@@ -56,19 +37,15 @@ def senha():
             print('Senha válida!')
             break
 
+            
+    ratname = input('Crie o seu Ratname: ')
 
-funcao_email()
-ratname()
-senha()
+    for usuario in usuarios:
+        if usuario["ratname"] == ratname and ratname != '':
+            print("Erro: Este Ratname já está em uso ou é inválido!")
+            return
 
-print()
-print('Cadastro realizado com sucesso!')
-print('Seus dados foram salvos.')
+    novo_usuario = {"email": email, "senha": senha, "ratname": ratname}
 
-login = input('Você deseja realizar o login? (sim/não): ')
-
-if login.lower() == 'sim':
-    print('Você será direcionado para o login do usuário.')
-    # O código da segunda funcionalidade será colocado aqui.
-else:
-    print('Aplicativo encerrado. Até mais!')
+    usuarios.append(novo_usuario)
+    print("Cadastro realizado com sucesso!")
