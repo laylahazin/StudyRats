@@ -5,19 +5,47 @@ usuario_logado = None
 
 def cadastrar_usuario():
     print("\n--- TELA DE CADASTRO ---")
-    email = input("Digite seu e-mail: ").strip().lower()
+    while True:
+        email = input("Digite seu e-mail: ").strip().lower()
+        if email.endswith('@ufrpe.br') and email.count('@') == 1 and len(email) > 9:
+            print('Email válido!')
+            break
+        else:
+            print('Email inválido! Verifique se você está colocando o seu email institucional corretamente!')
 
     for usuario in usuarios:
         if usuario["email"] == email:
             print("Erro: Este e-mail já está cadastrado!")
             return
 
-    senha = input("Digite sua senha: ")
-    ratname = input("Digite seu Ratname: ")
+    while True:
+        senha = input('Crie a sua senha no StudyRats! (Ela deve conter de 6 a 8 caracteres, uma letra maiúscula, um caractere especial e um numeral): ')
+
+        if len(senha) < 6:
+            print('Senha inválida! A senha deve ter no mínimo 6 caracteres! Tente novamente.')
+
+        elif len(senha) > 8:
+            print('Senha inválida! A senha deve ter no máximo 8 caracteres! Tente novamente.')
+
+        elif not any(letra.isupper() for letra in senha):
+            print('Senha inválida! A senha deve conter pelo menos uma letra maiúscula! Tente novamente.')
+
+        elif not any(letra.isdigit() for letra in senha):
+            print('Senha inválida! A senha deve conter pelo menos um número! Tente novamente.')
+
+        elif senha.isalnum():
+            print('Senha inválida! A senha deve conter pelo menos um caractere especial! Tente novamente.')
+
+        else:
+            print('Senha válida!')
+            break
+
+            
+    ratname = input('Crie o seu Ratname: ')
 
     for usuario in usuarios:
-        if usuario["ratname"] == ratname:
-            print("Erro: Este Ratname já está em uso!")
+        if usuario["ratname"] == ratname and ratname != '':
+            print("Erro: Este Ratname já está em uso ou é inválido!")
             return
 
     novo_usuario = {"email": email, "senha": senha, "ratname": ratname}
@@ -36,7 +64,7 @@ def realizar_login():
     # busca a lista
     for usuario in usuarios:
         if usuario["email"] == email and usuario["senha"] == senha:
-            usuario_logado = usuario["ratname"]  # Define o usuário como logado
+            usuario_logado = usuario["ratname"]
             print(f"\nLogin bem-sucedido! Você está conectado como: {usuario_logado}")
             return
 
@@ -46,7 +74,7 @@ def realizar_login():
 def deslogar():
     global usuario_logado
     print(f"\nSaindo da conta de {usuario_logado}...")
-    usuario_logado = None  # tira o login do usuario
+    usuario_logado = None
     print("Você saiu da conta com sucesso!")
 
 
@@ -58,7 +86,7 @@ def menu_principal():
         if usuario_logado:
             print(f" Status: LOGADO como ({usuario_logado})")
             print("====================")
-            print("1. Área Restrita / Perfil")
+            print("1. Perfil")
             print("2. Sair da conta (Logoff)")
             print("3. Encerrar aplicação")
         else:
@@ -73,9 +101,9 @@ def menu_principal():
         # --- FLUXO QUANDO O USUÁRIO JÁ ESTÁ LOGADO ---
         if usuario_logado is not None:
             if opcao == "1":
-                print(f"\n[ÁREA RESTRITA] Bem-vindo ao painel do usuário, {usuario_logado}!")
+                print(f"\nBem-vindo(a), {usuario_logado}!")
             elif opcao == "2":
-                deslogar()  # Apenas limpa a variável logado, sem fechar o programa
+                deslogar()
             elif opcao == "3":
                 print("Encerrando a aplicação. Até logo!")
                 break

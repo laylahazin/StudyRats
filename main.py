@@ -1,74 +1,52 @@
-# Código do cadastro do usuário no StudyRats
+from lista import usuarios
+from lista import usuario_logado
+from CadastroUsuario import cadastrar_usuario
+from LoginUsuario import realizar_login, deslogar
 
-print('Seja bem-vindo ao StudyRats!')
-print('Precisamos que você digite o seu email institucional.')
-
-
-def funcao_email():
-
+def menu_principal():
     while True:
-        email = input('Digite o seu email institucional: ')
-
-        if email.endswith('@ufrpe.br'):
-            print('Email válido!')
-            break
+        print("\n====================")
+        
+    
+        if usuario_logado:
+            print(f" Status: LOGADO como ({usuario_logado})")
+            print("====================")
+            print("1. Perfil")
+            print("2. Sair da conta (Logoff)")
+            print("3. Encerrar aplicação")
         else:
-            print('Email inválido! Verifique se você está colocando o seu email institucional!')
+            print(" Status: DESCONECTADO")
+            print("====================")
+            print("1. Cadastrar novo usuário")
+            print("2. Fazer Login")
+            print("3. Encerrar aplicação")
 
+        opcao = input("\nEscolha uma opção: ").strip()
 
-def ratname():
+        # --- FLUXO QUANDO O USUÁRIO JÁ ESTÁ LOGADO ---
+        if usuario_logado is not None:
+            if opcao == "1":
+                print(f"\nBem-vindo(a), {usuario_logado}!")
+            elif opcao == "2":
+                deslogar()
+            elif opcao == "3":
+                print("Encerrando a aplicação. Até logo!")
+                break
+            else:
+                print("Opção inválida, tente novamente.")
 
-    while True:
-        ratname = input('Crie o seu Ratname: ')
-
-        jaexistente = False
-
-        if ratname == '':
-            print('Ratname inválido! Digite um Ratname.')
-        elif jaexistente == True:
-            print('Ratname já existente! Crie outro Ratname.')
+        # --- FLUXO QUANDO NINGUÉM ESTÁ LOGADO ---
         else:
-            print('Seu Ratname é válido!')
-            break
+            if opcao == "1":
+                cadastrar_usuario()
+            elif opcao == "2":
+                realizar_login()
+            elif opcao == "3":
+                print("Encerrando a aplicação. Até logo!")
+                break
+            else:
+                print("Opção inválida, tente novamente.")
 
 
-def senha():
-
-    while True:
-        senha = input('Crie a sua senha no StudyRats! (Ela deve conter de 6 a 8 caracteres, uma letra maiúscula, um caractere especial e um numeral): ')
-
-        if len(senha) < 6:
-            print('Senha inválida! A senha deve ter no mínimo 6 caracteres! Tente novamente.')
-
-        elif len(senha) > 8:
-            print('Senha inválida! A senha deve ter no máximo 8 caracteres! Tente novamente.')
-
-        elif not any(letra.isupper() for letra in senha):
-            print('Senha inválida! A senha deve conter pelo menos uma letra maiúscula! Tente novamente.')
-
-        elif not any(letra.isdigit() for letra in senha):
-            print('Senha inválida! A senha deve conter pelo menos um número! Tente novamente.')
-
-        elif senha.isalnum():
-            print('Senha inválida! A senha deve conter pelo menos um caractere especial! Tente novamente.')
-
-        else:
-            print('Senha válida!')
-            break
-
-
-funcao_email()
-ratname()
-senha()
-
-print()
-print('Cadastro realizado com sucesso!')
-print('Seus dados foram salvos.')
-
-login = input('Você deseja realizar o login? (sim/não): ')
-
-if login.lower() == 'sim':
-    print('Você será direcionado para o login do usuário.')
-    # O código da segunda funcionalidade será colocado aqui.
-else:
-    print('Aplicativo encerrado. Até mais!')
+if __name__ == "__main__":
+    menu_principal()
