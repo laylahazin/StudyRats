@@ -1,0 +1,48 @@
+{
+  "alpha": {
+    "nome": "Teste",
+    "blocos": [
+      [
+        "Estudo",
+        60
+      ]
+    ]
+  },
+  "guigui": {
+    "nome": "Pomodoro",
+    "blocos": [
+      [
+        "Estudo",
+        25
+      ],
+      [
+        "Pausa",
+        5
+      ],
+      [
+        "Estudo",
+        25
+      ],
+      [
+        "Pausa",
+        5
+      ],
+      [
+        "Estudo",
+        25
+      ],
+      [
+        "Pausa",
+        5
+      ],
+      [
+        "Estudo",
+        25
+      ],
+      [
+        "Pausa longa",
+        15
+      ]
+    ]
+  }
+}
