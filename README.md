@@ -1,231 +1,147 @@
-# StudyRats
+# 🐭 StudyRats
 
-O StudyRats é um aplicativo de organização guiada para os estudos dos estudantes de BSI da UFRPE, unindo os alunos e monitores numa única plataforma. StudyRats reúne modelos de estudo, estudos guiados por esses modelos, salas de estudo, comunidades, calendário, rankings e recompensas em RatCoins e em Cursos. Os dados são armazenados localmente na máquina do usuário em arquivos JSON.
+> **Estude, conquiste, cresça.**
 
-## Conteúdo
+O **StudyRats** é uma aplicação de gestão de estudos gamificada desenvolvida em **Python 3.10+**, com duas interfaces intercambiáveis: uma **CLI colorida** para terminal e uma **GUI em Tkinter**. O sistema integra cadastro de usuários, modelos de estudo (Pomodoro personalizável), salas de estudo com monitores, comunidades, calendário, rankings e um sistema de recompensas chamado **RatCoins**.
 
-- Requisitos e execução
-- Usando o StudyRats
-- Interface Tkinter
-- Ratinho, o ajudante local
-- Funcionalidades
-- RatCoins e regras de recompensa
-- Dados e persistência
-- Estrutura do projeto
-- Personalizar as cores do terminal
-- Privacidade e limitações
+---
 
-## Requisitos e execução
+## 📋 Sumário
 
-- Python 3.10 ou superior.
-- Tkinter, incluído nas distribuições comuns de Python para Windows e mac.
+- [Visão Geral](#-visão-geral)
+- [Funcionalidades](#-funcionalidades)
+- [Arquitetura e Organização dos Módulos](#-arquitetura-e-organização-dos-módulos)
+- [Bibliotecas Utilizadas](#-bibliotecas-utilizadas)
+- [Requisitos e Instalação](#-requisitos-e-instalação)
+- [Como Rodar](#-como-rodar)
+- [Fluxogramas](#-fluxogramas)
 
-Num terminal, execute o código a seguir para usar o App:
+---
 
-python main.py
+## 🎯 Visão Geral
 
-E para usar as funcionalidades do StudyRats por meio do próprio terminal:
+O StudyRats foi projetado para ajudar estudantes e monitores a organizarem sua rotina de estudos de forma engajadora. A aplicação combina:
 
-python main.py --cli
+- **Gestão acadêmica**: cadastro, login, perfil, edição e exclusão de conta;
+- **Foco nos estudos**: modelos de estudo com blocos de foco/pausa (estilo Pomodoro), cronômetro de presença e calendário com lembretes;
+- **Colaboração**: salas de estudo com monitores, comunidades com posts, chat, likes e favoritos;
+- **Gamificação**: sistema de RatCoins, rankings de estudantes e monitores, e recompensas por conquistas.
 
-## Usando o StudyRats
+O projeto adota uma **arquitetura modular baseada em gerenciadores especializados**, com separação clara entre domínio, persistência, estado global e apresentação.
 
-### Sem login
+---
 
-Na janela, escolha *Cadastrar usuário* para criar uma conta ou *Fazer login* para entrar em uma conta existente. Durante essas operações, os prompts aparecem na área de entrada da própria janela. A senha é tratada como asteriscos enquanto é digitada por proteção.
+## ✨ Funcionalidades
 
-O cadastro aceita contas do tipo `ESTUDANTE` ou `MONITOR`, exige e-mail institucional `@ufrpe.br` e valida a senha conforme as regras mostradas pelo programa.
-
-### Com login
-
-O painel oferece atalhos para:
-
-Perfil -> Ver a conta, abrir operações de edição/exclusão, calendário, rankings, recompensas e acessos DEBUG.
-Modelo de estudo -> Selecionar ou criar um plano de blocos de estudo e pausas.
-Monitoria (Salas de Estudo) -> Consultar salas e participar durante o horário disponível.
-Sessão de estudo -> Registrar disciplina e duração de uma sessão.
-Comunidades -> Criar e acessar grupos, publicações, respostas e chat.
-RatCoins -> Ver saldo, histórico e recompensas.
-Calendário -> Consultar e administrar compromissos e lembretes.
-Ranking -> Consultar os rankings de estudantes e monitores.
-Área do monitor -> Criar, consultar e excluir notas privadas de monitor.
-Debug -> Acessar opções habilitadas na conta, como relógio de teste e ajuste administrativo do saldo.
-
-Algumas operações têm perguntas e submenus. A saída dessas operações e seus pedidos de informação são encaminhados para a área de texto da janela. Clique no campo de entrada e pressione *Enter* ou use o botão clicável *Enviar* para responder ou enviar dados. Não inicie outra operação enquanto a anterior estiver aguardando uma resposta.
-
-## Interface Tkinter
-
-A janela ao App usa o Tkinter, uma biblioteca de interface gráfica que acompanha o Python (já vem instalado com o python). O Tkinter fornece componentes básicos (Frame,Label,Button,Entry,Text e barra de rolagem), mas não fornece uma tela pronta do StudyRats. O código do projeto cria a janela, posiciona os componentes e define o que cada botão faz.
-
-A classe 'StudyRatsGUI' em 'gui_app.py' cria a janela e os widgets. O método 'executar' chama 'mainloop', o ciclo de eventos do Tkinter que mantém a janela aberta e reage a cliques, teclas e fechamentos.
-
-As funcionalidades antigas foram escritas para o terminal e usam `input()` e `print()`. Para aproveitá-las sem duplicar regras de negócio, a interface as executa em uma thread de trabalho. Filas (`queue.Queue`) transportam prompts, respostas e texto entre essa thread e a janela. A thread gráfica atualiza os
-widgets; a thread de trabalho executa cadastro, salas, calendário e os demais
-serviços. Senhas são mascaradas e não são repetidas no histórico visual.
-
-### Como a janela é montada
-
-1. `tk.Tk()` cria a janela principal.
-2. `title`, `geometry` e `minsize` configuram título e dimensões iniciais.
-3. `Frame` organiza os grupos de componentes.
-4. `Label`, `Button`, `Entry`, `Text` e `Scrollbar` formam navegação,
-   entrada/saída e área do Ratinho.
-5. `bind("<Return>", ...)` associa a tecla Enter a uma ação.
-6. O argumento `command` dos botões associa cliques a funções Python.
-7. `after(50, ...)` agenda a leitura periódica da fila de eventos sem bloquear
-   o ciclo gráfico.
-8. `mainloop()` mantém o programa atendendo aos eventos da janela.
-
-Portanto, trata-se de uma janela básica feita com componentes fornecidos pelo
-Tkinter, não de uma tela pré-fabricada. O layout e o comportamento são definidos
-no código e podem ser alterados em `gui_app.py`.
-
-## Ratinho, o ajudante local
-
-O campo **Ratinho — ajuda sobre o StudyRats** aceita perguntas sobre as opções
-e as regras do aplicativo. A função `responder` de `AssistenteRatinho.py`
-normaliza o texto digitado (minúsculas, remoção de acentos e separação em
-palavras), compara os termos com tópicos de orientação e mostra as respostas
-mais relevantes.
-
-Esse ajudante é local, determinístico e não envia perguntas ou dados para a
-internet. Não é um modelo de linguagem generativo: responde usando uma base
-curada sobre as funcionalidades conhecidas. Para ensinar um tópico novo,
-adicione palavras-chave e uma resposta à constante `ORIENTACOES` nesse arquivo.
-Se a pergunta não combinar com nenhum tópico, ele indica os assuntos que sabe
-explicar.
-
-## Funcionalidades
-
-### Contas - Cadastro, Login e CRUD COMPLETO
-
-Cadastro de estudante ou monitor com e-mail institucional.
-Login com verificação de credenciais.
-Edição de e-mail, Ratname e senha.
-Migração das referências locais ao trocar o Ratname.
-Exclusão de conta e dados associados.
-Liberação dos níveis DEBUG disponíveis.
-
-### Modelos de estudo e sessões de estudo
-
-Há quatro modelos predefinidos: Pomodoro, Estudo aprofundado, Revisão e
-exercícios e Sessão curta. Também é possível criar um modelo personalizado com
-tema, duração do bloco, duração das pausas e quantidade de blocos.
-
-O registro de presença usa o modelo confirmado quando há um. A duração efetiva
-separa estudo de pausas; somente o tempo de estudo conta para o limite de
-recompensa.
-
-### Monitoria (Salas de Estudo)
-
-As salas são definidas em `lista.py` e têm matéria, descrição, horário e
-capacidade. As sessões são recorrentes diariamente. Estudantes participam,
-acompanham atividades e enviam dúvidas; monitores podem publicar atividades e
-responder dúvidas. Monitores não consomem as vagas reservadas ao limite de
-estudantes.
-
-### Comunidades - Interações com outros usuários por meio do chat
-
-Usuários podem pesquisar, criar, editar e excluir comunidades conforme as
-permissões de autoria e tipo de conta. Participantes podem publicar, responder,
-reagir às publicações, guardar favoritos e conversar no chat. As permissões
-definem se a comunidade aceita estudantes, monitores ou ambos.
-
-### Calendário
-
-Compromissos guardam matéria, descrição, data e horário. É possível visualizar
-o mês, adicionar, editar e excluir compromissos. O programa verifica lembretes
-vencidos quando o calendário é aberto.
-
-### Rankings, recompensas e área do monitor
-
-Os rankings de estudantes e monitores são ordenados pelo saldo de RatCoins.
-Em datas de premiação previstas no código, líderes podem receber notificações
-com materiais de programação. Monitores também têm uma área de notas privada.
-
-## RatCoins e regras de recompensa
-
-Os ganhos são salvos em `ratcoins.json`. Eventos têm identificadores estáveis para evitar que a mesma ação gere o mesmo bônus mais de uma vez.
-
-| Ação | Recompensa |
-|---|---:|
-| Presença de estudante com pelo menos 30 minutos efetivos de estudo | +15 RC |
-| Primeiro modelo de estudo salvo e usado por um estudante | +15 RC |
-| Primeira entrada de estudante na sala em cada sessão diária | +20 RC |
-| Entrada explícita de estudante em uma comunidade | +10 RC |
-| Criação de comunidade por estudante | +20 RC |
-| Atividade publicada por monitor em uma sala | +5 RC |
-
-Pausas não contam como tempo efetivo para os 30 minutos. Monitores não recebem
-os bônus reservados a estudantes. Ajustes administrativos pelo DEBUG 2 ficam
-registrados como lançamentos próprios e não alteram o histórico original.
-
-## Dados e persistência
-
-Os arquivos ficam na pasta `dados/`, ao lado do código principal. `Dados.py`
-cria os arquivos ausentes e faz leitura/gravação JSON. Ao salvar, o programa
-grava primeiro em um arquivo temporário e o move para o destino, reduzindo o
-risco de deixar um JSON parcialmente escrito.
-
-| Arquivo | Conteúdo |
+| Módulo | Funcionalidades |
 |---|---|
-| `usuarios.json` | Contas, tipo de usuário, e-mail, Ratname, salt e hash da senha. |
-| `modelos_estudo.json` | Modelo de estudo ativo de cada Ratname. |
-| `presencas.json` | Histórico de sessões e tempo efetivo por usuário. |
-| `participantes_salas.json` | Participantes, atividades e dúvidas por sala e sessão. |
-| `ratcoins.json` | Histórico de lançamentos e eventos de recompensa processados. |
-| `comunidades.json` | Comunidades, membros, publicações, respostas, reações e mensagens. |
-| `calendario.json` | Compromissos e estado dos lembretes por usuário. |
-| `blocos_notas.json` | Notas privadas dos monitores. |
-| `configuracao_horario.json` | Relógio automático ou horário manual para testes. |
-| `notificacoes.json` | Notificações de recompensa e datas já processadas. |
+| **Autenticação** | Cadastro com validação de e-mail institucional (`@ufrpe.br`), senha forte (6–8 caracteres, maiúscula, número e caractere especial) e Ratname único; login com hash + salt; edição e exclusão de conta com confirmação. |
+| **Modelos de estudo** | Criação de modelos personalizados com blocos de estudo e pausa (Pomodoro customizável), persistidos por usuário. |
+| **Registro de presença** | Cronômetro com blocos do modelo; modo interativo no Windows (`msvcrt`) e modo "digite `finalizar`" em outros TTYs; cálculo do tempo efetivo de estudo (excluindo pausas). |
+| **Salas de estudo** | Salas por disciplina com monitores, sessões com expiração, atividades, dúvidas e respostas. |
+| **Área do monitor** | Blocos de notas por matéria, materiais complementares e exclusão. |
+| **Comunidades** | Criação com controle de público (estudantes / estudantes+monitores / monitores), posts com material compartilhado, respostas, likes/dislikes/favoritos e chat. |
+| **Calendário** | Compromissos de estudo com data/hora, visualização mensal com marcadores e lembretes automáticos. |
+| **RatCoins** | Saldo, histórico, ganho idempotente por evento e ajuste administrativo (DEBUG 2). |
+| **Rankings** | Rankings de estudantes e de monitores. |
+| **Assistente Ratinho** | Chat de ajuda embutido na GUI, respondendo dúvidas sobre o uso do sistema. |
 
-Os dados não são enviados a um servidor e não são compartilhados entre cópias
-do projeto. Faça cópias de segurança da pasta `dados/` para preservar contas e
-históricos.
+---
 
-As senhas não são gravadas em texto puro: `Dados.py` gera um salt aleatório e
-usa PBKDF2-HMAC com SHA-256. A verificação compara os hashes com
-`hmac.compare_digest`.
+## 🏗️ Arquitetura e Organização dos Módulos
 
-## Estrutura do projeto
+O projeto segue uma **organização por feature/domínio**, com um orquestrador central (`AplicacaoStudyRats` em `main.py`) que instancia e injeta dependências entre os gerenciadores.
+
+
+### Convenções identificadas
+
+- **Classes `Gerenciador*`** para domínios com estado persistente.
+- **Singleton de módulo** para `gerenciador_ratcoins` (importado diretamente por outros módulos).
+- **Menu pattern**: cada gerenciador expõe `menu()` que faz loop de `input()` + dispatch por dicionário de ações.
+- **Validação de schema inline** em `_carregar()` de cada gerenciador, com `ValueError` descritivo.
+- **Injeção de dependência** entre gerenciadores (ex.: `GerenciadorSalas(horario)`, `GerenciadorCalendario(horario)`, `AreaMonitor(salas)`).
+
+### Módulos internos
 
 | Arquivo | Responsabilidade |
 |---|---|
-| `main.py` | Compõe os gerenciadores e inicia a interface gráfica ou o menu CLI. |
-| `gui_app.py` | Janela Tkinter, navegação, entrada/saída, threads e comunicação com a aplicação. |
-| `AssistenteRatinho.py` | Base local de conhecimento e busca de orientações do Ratinho. |
-| `TemaTerminal.py` | Paleta ANSI e funções de apresentação do menu de terminal. |
-| `lista.py` | Estado compartilhado, usuários conectados e salas disponíveis. |
-| `Dados.py` | Persistência JSON e criação/verificação de credenciais. |
-| `CadastroUsuario.py` | Validação e criação de contas. |
-| `LoginUsuario.py` | Login, logout, edição, exclusão, permissões e migração de dados da conta. |
-| `ModeloEstudo.py` | Modelos predefinidos, criação personalizada, confirmação e exibição. |
-| `RegistroPresenca.py` | Cronômetro, alternância de blocos e gravação do histórico de estudo. |
-| `SalaEstudo.py` | Horários, capacidade, participação e interações nas salas. |
-| `Comunidades.py` | Comunidades, membros, publicações, chat e permissões. |
-| `Calendario.py` | Compromissos, visualização mensal e lembretes. |
-| `Horario.py` | Relógio automático ou manual para testes. |
-| `Ratcoins.py` | Ganhos, saldo, histórico, ajustes e proteção contra duplicidades. |
-| `Recompensas.py` | Regras e notificações de recompensas. |
-| `RankingEstudantes.py` | Ranking de estudantes por saldo. |
-| `RankingMonitores.py` | Ranking de monitores por saldo. |
-| `AreaMonitor.py` | Acesso às salas e notas privadas do monitor. |
+| `main.py` | Ponto de entrada + orquestrador `AplicacaoStudyRats`; parsing de `--cli`. |
+| `gui_app.py` | Interface Tkinter; integra a GUI com a lógica CLI via filas. |
+| `lista.py` | Estado global compartilhado (`estado.usuarios`, `estado.usuario_logado`, etc.). |
+| `Dados.py` | `persistencia` (JSON) + `gerenciador_credenciais` (hash/salt). |
+| `TemaTerminal.py` | Cores ANSI + helpers de terminal (`titulo`, `opcao`, `perguntar`, `mensagem`). |
+| `Horario.py` | `GerenciadorHorario` (modo automático/manual para testes). |
+| `CadastroUsuario.py` | Cadastro de novos usuários. |
+| `LoginUsuario.py` | Login, edição/exclusão de conta, códigos DEBUG. |
+| `ModeloEstudo.py` | Modelos de estudo personalizados. |
+| `RegistroPresenca.py` | Cronômetro de estudo + concessão de RatCoins. |
+| `SalaEstudo.py` | Salas de estudo com monitores e sessões. |
+| `AreaMonitor.py` | Área exclusiva do monitor (notas, salas). |
+| `Comunidades.py` | Comunidades, posts, chat, interações. |
+| `Calendario.py` | Compromissos de estudo e lembretes. |
+| `Ratcoins.py` | Gerenciador de RatCoins (singleton). |
+| `Recompensas.py` | Menu de recompensas + notificações. |
+| `RankingEstudantes.py` | Ranking de estudantes. |
+| `RankingMonitores.py` | Ranking de monitores. |
+| `AssistenteRatinho.py` | Assistente de ajuda (`responder(pergunta)`). |
 
-## Personalizar as cores do terminal
 
-O modo `--cli` usa sequências ANSI sem pacote externo. Edite a constante
-`CORES` em `TemaTerminal.py` para mudar as cores. O programa desativa a cor
-quando a saída não é um terminal interativo ou quando a variável `NO_COLOR`
-está definida.
+### Arquivos JSON
 
-## Privacidade e limitações
+| Arquivo |	Conteúdo |
+|---|---|
+|usuarios.json	| Contas cadastradas (credenciais com hash/salt). |
+|modelos_estudo.json	| Modelos de estudo por usuário. |
+|presencas.json | Histórico de sessões de estudo. |
+|calendario.json | Compromissos por usuário. |
+|blocos_notas.json | Notas criadas por monitores. |
+|comunidades.json | Comunidades, posts, chats e interações. |
+|ratcoins.json | Histórico de RatCoins e eventos processados. |
+|notificacoes.json | Notificações pendentes por usuário. |
+|participantes_salas.json | Participantes e atividades das salas.|
+|configuracao_horario.json | Configuração do modo de horário (automático/manual). |
 
-- O banco de dados é local em JSON, sem sincronização entre dispositivos.
-- O Ratinho responde apenas a tópicos incluídos em sua base local e pode não
-  entender perguntas fora desse escopo.
-- O calendário e as salas usam o relógio local, exceto quando DEBUG 1 define
-  um horário manual.
-- A janela usa os diálogos de texto das funcionalidades atuais dentro de um
-  painel; ela não transforma automaticamente cada formulário de terminal em
-  um formulário gráfico separado.
+---
+
+## 📚 Bibliotecas Utilizadas
+
+O projeto prioriza a **biblioteca padrão do Python**, com apenas o `tkinter` (que acompanha o CPython) para a GUI. **Não há dependências externas obrigatórias**.
+
+| Biblioteca | Origem | Uso no projeto | Justificativa |
+|---|---|---|---|
+| `tkinter` / `tkinter.ttk` | Stdlib | Interface gráfica (`gui_app.py`) | Widgets nativos multiplataforma sem dependências externas. |
+| `queue` | Stdlib | Ponte thread↔GUI | `Queue` é thread-safe por design — ideal para comunicação entre a thread de negócio e o loop Tk. |
+| `threading` | Stdlib | Execução das ações sem travar a GUI | Necessário porque `mainloop()` do Tk é single-threaded. |
+| `argparse` | Stdlib | Flag `--cli` em `main.py` | Parsing de argumentos robusto e auto-documentado. |
+| `builtins` | Stdlib | Interceptação de `input`/`print` | Permite reutilizar todo o código CLI na GUI sem reescrevê-lo. |
+| `json` | Stdlib | Persistência | Formato legível, inspecionável manualmente, sem servidor. |
+| `uuid` | Stdlib | IDs únicos de comunidades, presenças, eventos RatCoins | Evita colisão sem coordenação central. |
+| `hashlib` / `secrets` | Stdlib | Hash + salt de senhas | Boas práticas de armazenamento de credenciais. |
+| `datetime` | Stdlib | Calendário, cronômetro, horário simulável | Manipulação de datas robusta. |
+| `calendar` | Stdlib | Renderização do calendário mensal | Geração da matriz semanal pronta. |
+| `os`, `sys`, `shutil`, `time` | Stdlib | Detecção de TTY, largura do terminal, temporização, ANSI no Windows | Controle fino da saída em terminal. |
+| `msvcrt` | Stdlib (Windows) | Leitura não-bloqueante de teclas no cronômetro | Único meio nativo no Windows para `kbhit`/`getwch`. |
+| `ctypes` | Stdlib | Ativação de ANSI no console Windows | Habilita `ENABLE_VIRTUAL_TERMINAL_PROCESSING`. |
+
+---
+
+## ⚙️ Requisitos e Instalação
+
+### Requisitos
+
+- **Python 3.10+** (uso intensivo de `str | None`, `dict | None`, `tuple[str, str]`).
+- **Tkinter** disponível na instalação.
+  - No **Linux (Debian/Ubuntu)**: `sudo apt install python3-tk`
+  - No **Windows/macOS**: já incluso na instalação oficial do Python.
+- **Terminal com suporte a TTY** para a experiência CLI colorida (opcional; a GUI é o padrão).
+
+## Como Rodar
+
+# Interface gráfica (recomendada)
+python main.py
+
+# Interface CLI colorida (terminal)
+python main.py --cli
+
+## Fluxogramas
+Link: https://app.diagrams.net/#G1xDOIbS7_qCYvkIVmBODh53pixesGJsD9#%7B%22pageId%22%3A%227CZMHdt9vsC0GG7J5-9B%22%7D
