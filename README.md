@@ -1,4 +1,4 @@
-# 🐭 StudyRats
+# StudyRats
 
 > **Estude, conquiste, cresça.**
 
@@ -6,7 +6,7 @@ O **StudyRats** é uma aplicação de gestão de estudos gamificada desenvolvida
 
 ---
 
-## 📋 Sumário
+## Sumário
 
 - [Visão Geral](#-visão-geral)
 - [Funcionalidades](#-funcionalidades)
@@ -18,7 +18,7 @@ O **StudyRats** é uma aplicação de gestão de estudos gamificada desenvolvida
 
 ---
 
-## 🎯 Visão Geral
+## Visão Geral
 
 O StudyRats foi projetado para ajudar estudantes e monitores a organizarem sua rotina de estudos de forma engajadora. A aplicação combina:
 
@@ -31,7 +31,7 @@ O projeto adota uma **arquitetura modular baseada em gerenciadores especializado
 
 ---
 
-## ✨ Funcionalidades
+## Funcionalidades
 
 | Módulo | Funcionalidades |
 |---|---|
@@ -48,7 +48,7 @@ O projeto adota uma **arquitetura modular baseada em gerenciadores especializado
 
 ---
 
-## 🏗️ Arquitetura e Organização dos Módulos
+## Arquitetura e Organização dos Módulos
 
 O projeto segue uma **organização por feature/domínio**, com um orquestrador central (`AplicacaoStudyRats` em `main.py`) que instancia e injeta dependências entre os gerenciadores.
 
@@ -103,7 +103,7 @@ O projeto segue uma **organização por feature/domínio**, com um orquestrador 
 
 ---
 
-## 📚 Bibliotecas Utilizadas
+## Bibliotecas Utilizadas
 
 O projeto prioriza a **biblioteca padrão do Python**, com apenas o `tkinter` (que acompanha o CPython) para a GUI. **Não há dependências externas obrigatórias**.
 
@@ -125,7 +125,7 @@ O projeto prioriza a **biblioteca padrão do Python**, com apenas o `tkinter` (q
 
 ---
 
-## ⚙️ Requisitos e Instalação
+## Requisitos e Instalação
 
 ### Requisitos
 
