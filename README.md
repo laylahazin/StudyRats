@@ -107,7 +107,7 @@ O projeto segue uma **organização por feature/domínio**, com um orquestrador 
 
 O projeto prioriza a **biblioteca padrão do Python**, com apenas o `tkinter` (que acompanha o CPython) para a GUI. **Não há dependências externas obrigatórias**.
 
-| Biblioteca | Origem | Uso no projeto | Justificativa |
+| Biblioteca | Origem | Uso | Motivo |
 |---|---|---|---|
 | `tkinter` / `tkinter.ttk` | Stdlib | Interface gráfica (`gui_app.py`) | Widgets nativos multiplataforma sem dependências externas. |
 | `queue` | Stdlib | Ponte thread↔GUI | `Queue` é thread-safe por design — ideal para comunicação entre a thread de negócio e o loop Tk. |
