@@ -1,0 +1,38 @@
+[
+  {
+    "id": "b24ff0681a404a1ead78f080ace0b705",
+    "nome": "RatAmigos",
+    "disciplina": "Pisi",
+    "assunto": "sab",
+    "descricao": "sab",
+    "criador": "Guiu",
+    "membros": [
+      "Guiu"
+    ],
+    "publicacoes": [
+      {
+        "autor": "Guiu",
+        "conteudo": "SALVE TROPA DO STUDYRATS",
+        "material": "",
+        "respostas": [
+          {
+            "autor": "Guiu",
+            "conteudo": "boa"
+          }
+        ],
+        "likes": [],
+        "dislikes": [],
+        "favoritos": [
+          "Guiu"
+        ]
+      }
+    ],
+    "tipo_acesso": "ESTUDANTES",
+    "mensagens": [
+      {
+        "autor": "Guiu",
+        "conteudo": "oiii gente"
+      }
+    ]
+  }
+]

@@ -1,0 +1,95 @@
+{
+  "alpha": [
+    {
+      "duracao_segundos": 1800
+    }
+  ],
+  "guigui": [
+    {
+      "disciplina": "Pisi",
+      "inicio": "2026-10-20T21:09:11",
+      "fim": "2026-10-20T21:09:21",
+      "duracao_segundos": 9
+    },
+    {
+      "disciplina": "Pisi",
+      "inicio": "2026-10-20T21:48:38",
+      "fim": "2026-10-20T21:48:53",
+      "duracao_segundos": 14
+    },
+    {
+      "disciplina": "Pisi",
+      "inicio": "2026-10-20T21:49:15",
+      "fim": "2026-10-20T21:49:22",
+      "duracao_segundos": 6
+    },
+    {
+      "disciplina": "Pisi",
+      "inicio": "2026-10-20T21:53:04",
+      "fim": "2026-10-20T21:53:18",
+      "duracao_segundos": 13
+    },
+    {
+      "disciplina": "Matemática",
+      "inicio": "2026-10-20T21:53:36",
+      "fim": "2026-10-20T21:53:46",
+      "duracao_segundos": 9
+    }
+  ],
+  "Guiu": [
+    {
+      "id": "9a25f69c3e7b4b62a8617a3613b51c11",
+      "disciplina": "Pisi",
+      "inicio": "2026-11-21T21:55:47",
+      "fim": "2026-11-21T21:55:55",
+      "duracao_segundos": 8
+    },
+    {
+      "id": "f2f2ad110f54440298fd6f277169f6fa",
+      "disciplina": "Pisi",
+      "inicio": "2026-11-21T21:56:16",
+      "fim": "2026-11-21T21:56:18",
+      "duracao_segundos": 2
+    },
+    {
+      "id": "2735e909c10e42e09d0d4586b51fc8c6",
+      "disciplina": "Pisi",
+      "inicio": "2026-11-22T01:09:09",
+      "fim": "2026-11-22T01:09:35",
+      "duracao_segundos": 26,
+      "tempo_estudo_segundos": 26
+    },
+    {
+      "id": "96f125d4bb6944d18051d5535c00e398",
+      "disciplina": "Pisi",
+      "inicio": "2026-11-22T01:37:10",
+      "fim": "2026-11-22T01:40:10",
+      "duracao_segundos": 180,
+      "tempo_estudo_segundos": 120
+    },
+    {
+      "id": "0bdd3df31e004085a0f9deaae017825d",
+      "disciplina": "Pisi",
+      "inicio": "2026-11-22T01:43:26",
+      "fim": "2026-11-22T01:43:29",
+      "duracao_segundos": 3,
+      "tempo_estudo_segundos": 3
+    },
+    {
+      "id": "2acd528782b64564bca3ae96ac315da0",
+      "disciplina": "Pisi",
+      "inicio": "2026-11-22T01:44:21",
+      "fim": "2026-11-22T01:47:21",
+      "duracao_segundos": 180,
+      "tempo_estudo_segundos": 120
+    },
+    {
+      "id": "23f1508329e743589bd28ac0e521cc4b",
+      "disciplina": "Programação",
+      "inicio": "2026-11-22T03:54:41",
+      "fim": "2026-11-22T03:54:41",
+      "duracao_segundos": 6,
+      "tempo_estudo_segundos": 6
+    }
+  ]
+}

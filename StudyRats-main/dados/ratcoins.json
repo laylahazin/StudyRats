@@ -1,0 +1,52 @@
+{
+  "usuarios": {
+    "Guiu": [
+      {
+        "atividade": "Entrada na sala de estudo: Sala de Sustentabilidade em Sistemas de Informação",
+        "pontos": 20,
+        "evento_id": "sala:sus:2026-11-21T21:00:Guiu"
+      },
+      {
+        "atividade": "Marcação de presença de estudo",
+        "pontos": 15,
+        "evento_id": "presenca:9a25f69c3e7b4b62a8617a3613b51c11"
+      },
+      {
+        "atividade": "Marcação de presença de estudo",
+        "pontos": 15,
+        "evento_id": "presenca:f2f2ad110f54440298fd6f277169f6fa"
+      },
+      {
+        "atividade": "Criar comunidade: SomosTodosColegasDeTrabalho",
+        "pontos": 900,
+        "evento_id": "comunidade-criar:4fac37e4996847f9829383ac2389f40b"
+      },
+      {
+        "atividade": "Criar comunidade: AAAAAA",
+        "pontos": 20,
+        "evento_id": "comunidade-criar:b600b02e80d947aa999e541fc243cd6f"
+      },
+      {
+        "atividade": "Criar e usar o primeiro modelo de estudo",
+        "pontos": 15,
+        "evento_id": "modelo-primeiro-uso:Guiu"
+      },
+      {
+        "atividade": "Criar comunidade: RatAmigos",
+        "pontos": 20,
+        "evento_id": "comunidade-criar:b24ff0681a404a1ead78f080ace0b705"
+      }
+    ]
+  },
+  "eventos_processados": {
+    "Guiu": [
+      "sala:sus:2026-11-21T21:00:Guiu",
+      "presenca:9a25f69c3e7b4b62a8617a3613b51c11",
+      "presenca:f2f2ad110f54440298fd6f277169f6fa",
+      "comunidade-criar:4fac37e4996847f9829383ac2389f40b",
+      "comunidade-criar:b600b02e80d947aa999e541fc243cd6f",
+      "modelo-primeiro-uso:Guiu",
+      "comunidade-criar:b24ff0681a404a1ead78f080ace0b705"
+    ]
+  }
+}

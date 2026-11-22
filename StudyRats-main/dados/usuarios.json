@@ -1,0 +1,18 @@
+[
+  {
+    "email": "guilherme.fsouza@ufrpe.br",
+    "ratname": "Guiu",
+    "tipo_usuario": "ESTUDANTE",
+    "senha_salt": "58e9e9aceab8b30c4eae26965faf0763",
+    "senha_hash": "76f83508ef39ed1b91504e2afa303845dd7ac10a3f5db988700849492251c590",
+    "acesso_debug_1": true,
+    "acesso_debug_2": true
+  },
+  {
+    "email": "laylahazin@ufrpe.br",
+    "ratname": "laylamonitora",
+    "tipo_usuario": "MONITOR",
+    "senha_salt": "98ea0770d670ca30276e60abead5057a",
+    "senha_hash": "daf54a3a5aa0658c79c0b72bf4d138aa10ba317a352c1eb7e7d9f4b4e398d9d7"
+  }
+]

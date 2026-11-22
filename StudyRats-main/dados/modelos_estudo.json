@@ -1,0 +1,37 @@
+{
+  "alpha": {
+    "nome": "Teste",
+    "blocos": [
+      [
+        "Estudo",
+        60
+      ]
+    ]
+  },
+  "Guiu": {
+    "nome": "Revisão e exercícios",
+    "blocos": [
+      [
+        "Revisão do conteúdo",
+        30
+      ],
+      [
+        "Pausa",
+        5
+      ],
+      [
+        "Resolução de exercícios",
+        30
+      ],
+      [
+        "Pausa",
+        5
+      ],
+      [
+        "Resumo final",
+        20
+      ]
+    ],
+    "confirmado": true
+  }
+}

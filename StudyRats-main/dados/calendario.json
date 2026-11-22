@@ -1,0 +1,11 @@
+{
+  "Guiu": [
+    {
+      "materia": "MATEMATICA",
+      "descricao": "ESTUDAR",
+      "data": "23/11/2026",
+      "hora": "10:00",
+      "lembrete_exibido": false
+    }
+  ]
+}
