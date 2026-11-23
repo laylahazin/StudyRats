@@ -1,8 +1,6 @@
 import os
 import sys
 
-
-# Altere estes códigos ANSI para personalizar as cores do terminal.
 CORES = {
     "titulo": "95",
     "destaque": "96",
@@ -60,3 +58,4 @@ def perguntar(texto: str) -> str:
 
 def mensagem(texto: str, tipo: str = "suave") -> None:
     print(colorir(texto, tipo))
+
